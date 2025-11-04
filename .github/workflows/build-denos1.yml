@@ -1,0 +1,34 @@
+name: Build DenOS ISO
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-iso:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y debootstrap xorriso grub-pc-bin grub-efi-amd64-bin mtools squashfs-tools genisoimage
+
+      - name: Run build script
+        run: |
+          mkdir -p output
+          bash scripts/build_iso_ci.sh
+
+      - name: Upload ISO artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: denos-iso
+          path: output/*.iso
+
