@@ -23,11 +23,11 @@ jobs:
                                  network-manager net-tools wireless-tools wpagui curl openssh-server openssh-client blackbox xserver-xorg-core xserver-xorg xinit xterm \
                                  screenfetch screen lxterminal vim iputils-ping psmisc htop nmap wget git ca-certificates nano fdisk
               
-              bash 01_denos_pre_reqs.sh
-              bash 02_denos_debootstrap.sh
-              bash 03_denos_chroot.sh
-              bash 04_denos_MakeSquashfs.sh
-              bash 05_denos_BiosUEFI_ISO.sh
+              bash scripts/01_denos_pre_reqs.sh
+              bash scripts/02_denos_debootstrap.sh
+              bash scripts/03_denos_chroot.sh
+              bash scripts/04_denos_MakeSquashfs.sh
+              bash scripts/05_denos_BiosUEFI_ISO.sh
             "
 
       - name: Upload ISO artifact
