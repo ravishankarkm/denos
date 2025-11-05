@@ -1,34 +1,41 @@
 name: Build DenOS ISO
 
 on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
+  workflow_dispatch:  # enables the "Run workflow" button
 
 jobs:
-  build-iso:
+  build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install dependencies
+      - name: Set up Docker and run DenOS build
         run: |
-          sudo apt-get update
-          sudo apt-get install -y debootstrap xorriso grub-pc-bin grub-efi-amd64-bin mtools squashfs-tools genisoimage
-
-      - name: Run build script
-        run: |
-          mkdir -p output
-          bash scripts/build_iso_ci.sh
+          docker run --rm \
+            -v ${{ github.workspace }}:/denos \
+            -w /denos \
+            debian:bookworm bash -c "
+              set -e
+              apt-get update
+              apt-get install -y sudo debootstrap squashfs-tools grub-pc-bin grub-efi-amd64-bin xorriso mtools isolinux live-boot systemd-sysv \
+                                 network-manager net-tools wireless-tools wpagui curl openssh-server openssh-client blackbox xserver-xorg-core xserver-xorg xinit xterm \
+                                 screenfetch screen lxterminal vim iputils-ping psmisc htop nmap wget git ca-certificates nano fdisk
+              
+              bash 01_denos_prepare.sh
+              bash 02_denos_debootstrap.sh
+              bash 03_denos_chroot.sh
+              bash 04_denos_squashfs.sh
+              bash 05_denos_iso.sh
+            "
 
       - name: Upload ISO artifact
         uses: actions/upload-artifact@v4
         with:
           name: denos-iso
-          path: output/*.iso
+          path: |
+            *.iso
+            output/*.iso
+            build/*.iso
 
