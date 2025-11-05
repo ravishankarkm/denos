@@ -24,11 +24,11 @@ jobs:
                                  screenfetch screen lxterminal vim iputils-ping psmisc htop nmap wget git ca-certificates nano fdisk
 
               echo '--- Running DenOS Build Scripts ---'
-              bash scripts/01_denos_prepare.sh
+              bash scripts/01_denos_pre_reqs.sh
               bash scripts/02_denos_debootstrap.sh
               bash scripts/03_denos_chroot.sh
-              bash scripts/04_denos_squashfs.sh
-              bash scripts/05_denos_iso.sh
+              bash scripts/04_denos_MakeSquashfs.sh
+              bash scripts/05_denos_BiosUEFI_ISO.sh
 
               echo '✅ DenOS Build Completed Successfully'
             "
