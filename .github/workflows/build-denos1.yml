@@ -1,4 +1,4 @@
-name: Build DenOS ISO
+name: Build DenOS ISO testing
 
 on:
   workflow_dispatch:  # enables the Run workflow" button
