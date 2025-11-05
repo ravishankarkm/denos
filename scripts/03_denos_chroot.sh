@@ -37,6 +37,5 @@ echo -e "127.0.0.1\t$DISTRO_HOSTNAME" >> /etc/hosts
 # Change user live password to : newpassword
 #echo 'live:live' | chpasswd  
 
-passwd -d root
 
 exit
