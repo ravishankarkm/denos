@@ -67,7 +67,7 @@ if [ -n "$GITHUB_WORKSPACE" ]; then
     echo "Detected GitHub Actions environment."
     mkdir -p "$GITHUB_WORKSPACE/output"
     echo "Copying ISO to $GITHUB_WORKSPACE/output/ ..."
-    find "$HOME/$LIVE_BOOT" -type f -name "*.iso" -exec cp -v {} "$GITHUB_WORKSPACE/output/" \;
+    find "$HOME/$LIVE_BOOT" -type f -name "*.iso" -exec cp -v {} "/denos/output/" \;
 else
     echo "GITHUB_WORKSPACE not set, skipping ISO copy."
 fi
