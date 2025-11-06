@@ -24,8 +24,8 @@ jobs:
             mtools dosfstools isolinux genisoimage
 
       # 3️⃣ Make all build scripts executable
-      - name: Make build scripts executable
-        run: chmod +x ./*.sh
+      #- name: Make build scripts executable
+      #  run: chmod +x ./*.sh
 
       # 4️⃣ Run all build scripts sequentially
       - name: Run DenOS build scripts
