@@ -37,5 +37,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: denos-iso
-          path: $GITHUB_WORKSPACE/output/denos.iso
+          path: $GITHUB_WORKSPACE/output/*.iso
           if-no-files-found: warn  
