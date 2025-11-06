@@ -31,6 +31,7 @@ jobs:
       - name: Run DenOS build scripts
         run: |
           set -e
+          mkdir -p $GITHUB_WORKSPACE/output
           scripts/01_denos_pre_reqs.sh
           scripts/02_denos_debootstrap.sh
           scripts/03_denos_chroot.sh || ./03_denos_chroot_lxde.sh || true
